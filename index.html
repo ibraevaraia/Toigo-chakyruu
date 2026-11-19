@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#eee5d7">
-
 <title>Үй тоюна чакыруу</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap');
 
 * {
     margin: 0;
@@ -17,282 +15,248 @@
 }
 
 body {
-    background: #eee8de;
-    color: #40352b;
+    background: #eee7dc;
+    color: #55442e;
     font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
 }
 
 .hidden {
     display: none !important;
 }
 
-/* ENVELOPE SCREEN */
+/* ENVELOPE */
 
 #intro {
     position: fixed;
     inset: 0;
     z-index: 10;
+    background: radial-gradient(circle, #fffaf1, #e5d7c2);
     display: flex;
     justify-content: center;
     align-items: center;
-    background:
-        radial-gradient(circle, #fffaf1, #e8ddcc);
     padding: 20px;
 }
 
 .envelope-area {
     text-align: center;
-    width: 100%;
-    max-width: 420px;
 }
 
 .intro-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 27px;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     margin-bottom: 45px;
-    color: #756044;
 }
 
 .envelope {
     position: relative;
     width: 320px;
-    max-width: 90vw;
+    max-width: 85vw;
     height: 210px;
-    margin: auto;
-    background: #e9ddc9;
-    box-shadow: 0 20px 45px #75604435;
+    background: #ddc9aa;
+    box-shadow: 0 20px 50px #60451e35;
     cursor: pointer;
-    perspective: 1000px;
 }
 
 .envelope::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(145deg, #f8f0e4, #d9c6a8);
+    background: linear-gradient(145deg, #fff8eb, #d8c3a0);
     clip-path: polygon(0 0, 100% 0, 50% 58%);
     z-index: 3;
     transform-origin: top;
-    transition: transform 1s ease;
+    transition: transform 1s;
 }
 
 .envelope::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #e8d8c0, #cbb28d);
+    background: linear-gradient(135deg, #e9d9bd, #c8ad83);
     clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
-    z-index: 2;
-}
-
-.wax-seal {
-    position: absolute;
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #e5c77f, #a77c36 75%);
-    border: 2px solid #f0d99b;
-    box-shadow: 0 4px 12px #6b4a1d55;
-    left: 50%;
-    top: 48%;
-    transform: translate(-50%, -50%);
-    z-index: 4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff3d3;
-    font-size: 29px;
-}
-
-.wax-seal span {
-    font-family: 'Cormorant Garamond', serif;
 }
 
 .envelope.open::before {
     transform: rotateX(180deg);
-    z-index: 1;
+}
+
+.wax-seal {
+    position: absolute;
+    z-index: 4;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e9ce8b, #9d7133);
+    border: 2px solid #f5dda0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    transition: 0.5s;
 }
 
 .envelope.open .wax-seal {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(1.5);
-    transition: 0.5s;
 }
 
 .tap-text {
     margin-top: 35px;
     font-size: 11px;
     letter-spacing: 3px;
-    color: #887354;
 }
 
 /* INVITATION */
 
-#invitation {
-    animation: fadeIn 1.5s ease;
-}
-
 .hero {
     min-height: 100vh;
-    padding: 70px 20px;
+    padding: 60px 18px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    justify-content: center;
+
     background:
-        linear-gradient(#fffaf0bd, #fffaf0bd),
-        url("assets/shyrdak.jpeg") center/cover no-repeat;
+        linear-gradient(#fffaf0b8, #fffaf0b8),
+        url("./assets/shyrdak.jpeg") center center / cover no-repeat;
 }
 
-.invitation-card {
+.card {
     width: 100%;
     max-width: 650px;
-    padding: 55px 28px;
+    padding: 45px 25px;
+    text-align: center;
+    background: #fffaf0df;
     border: 1px solid #b99b68;
     outline: 1px solid #b99b6866;
-    outline-offset: 8px;
-    background: #fffaf0dc;
-    box-shadow: 0 15px 60px #4a38201c;
+    outline-offset: 7px;
 }
 
-.small-heading {
+.small-title {
     font-size: 11px;
-    letter-spacing: 5px;
-    color: #94784e;
+    letter-spacing: 4px;
     margin-bottom: 25px;
+    color: #98794b;
 }
 
 h1 {
     font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 8vw, 58px);
     font-weight: 500;
-    font-size: clamp(35px, 8vw, 58px);
     line-height: 1.1;
-    letter-spacing: 2px;
-    color: #5d4930;
     margin-bottom: 25px;
 }
 
-.gold-line {
-    width: 70px;
+.line {
+    width: 65px;
     height: 1px;
-    background: #ae8b50;
+    background: #ad8b50;
     margin: 25px auto;
 }
 
-.invitation-text {
+.text {
     font-family: 'Cormorant Garamond', serif;
     font-size: 21px;
     line-height: 1.65;
-    color: #5e5041;
 }
 
 .event-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 31px;
-    color: #8d7044;
-    margin: 30px 0 15px;
+    font-size: 28px;
+    margin: 30px 0;
 }
 
 .details {
-    margin-top: 35px;
-    line-height: 2;
     font-size: 14px;
-    letter-spacing: 1px;
+    line-height: 2;
+    margin-top: 30px;
 }
 
 .details strong {
-    color: #8b6d3e;
+    color: #987544;
 }
 
 .hosts {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 27px;
-    color: #795d37;
-    margin-top: 15px;
-    line-height: 1.6;
+    font-size: 26px;
+    line-height: 1.5;
+    margin-top: 10px;
 }
 
 .closing {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 21px;
+    font-size: 20px;
     line-height: 1.6;
-    margin-top: 35px;
-    color: #5d4930;
 }
 
-/* HOUSE PHOTOS */
+/* PHOTOS */
 
 .gallery {
-    padding: 65px 15px;
-    background: #f5f0e8;
+    padding: 60px 15px;
     text-align: center;
+    background: #f5f0e8;
 }
 
-.gallery-title {
+.gallery h2 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 38px;
-    color: #765c38;
     margin-bottom: 35px;
 }
 
 .house-photo {
-    width: 100%;
-    max-width: 850px;
     display: block;
-    margin: 0 auto 28px;
+    width: 100%;
+    max-width: 900px;
     height: auto;
-    object-fit: cover;
+    margin: 0 auto 25px;
 }
 
-/* MUSIC BUTTON */
+.photo-error {
+    display: none;
+    color: #9b4238;
+    padding: 15px;
+    font-size: 13px;
+}
+
+/* MUSIC */
 
 .music-button {
     position: fixed;
     right: 20px;
-    bottom: 22px;
+    bottom: 20px;
     z-index: 20;
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 1px solid #b99b68;
     background: #fffaf0;
-    color: #87683b;
-    font-size: 19px;
+    color: #806239;
+    font-size: 22px;
     cursor: pointer;
-    box-shadow: 0 5px 20px #0002;
 }
 
 footer {
     text-align: center;
-    padding: 30px 15px;
-    background: #eee5d7;
-    color: #917955;
+    padding: 30px;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
+    font-size: 22px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@media (max-width: 480px) {
-    .invitation-card {
-        padding: 45px 20px;
+@media(max-width: 480px) {
+    .card {
+        padding: 35px 18px;
     }
 
-    .invitation-text {
+    .text {
         font-size: 19px;
     }
 
     .details {
         font-size: 12px;
-    }
-
-    .hosts {
-        font-size: 24px;
     }
 }
 </style>
@@ -305,43 +269,32 @@ footer {
 <section id="intro">
     <div class="envelope-area">
 
-        <div class="intro-title">
-            A SPECIAL INVITATION
+        <div class="intro-title">A SPECIAL INVITATION</div>
+
+        <div class="envelope" id="envelope">
+            <div class="wax-seal">⌂</div>
         </div>
 
-        <div class="envelope" id="envelope" onclick="openInvitation()">
-            <div class="wax-seal">
-                <span>⌂</span>
-            </div>
-        </div>
-
-        <div class="tap-text">
-            OPEN YOUR INVITATION
-        </div>
+        <div class="tap-text">OPEN YOUR INVITATION</div>
 
     </div>
 </section>
 
-<!-- INVITATION CONTENT -->
+<!-- INVITATION -->
 
 <main id="invitation" class="hidden">
 
     <section class="hero">
 
-        <div class="invitation-card">
+        <div class="card">
 
-            <div class="small-heading">
-                СИЗДЕРГЕ ЧЫН ЖҮРӨКТӨН
-            </div>
+            <div class="small-title">СИЗДЕРГЕ ЧЫН ЖҮРӨКТӨН</div>
 
-            <h1>
-                ҮЙ ТОЮНА<br>
-                ЧАКЫРУУ
-            </h1>
+            <h1>ҮЙ ТОЮНА<br>ЧАКЫРУУ</h1>
 
-            <div class="gold-line"></div>
+            <div class="line"></div>
 
-            <p class="invitation-text">
+            <p class="text">
                 Урматтуу туугандар, жакындар жана кадырлуу коноктор!
                 <br><br>
                 Көптөн күткөн тилегибиз орундалып, өз үйүбүздүн босогосун аттадык.
@@ -353,34 +306,36 @@ footer {
                 Тойго келип конок болуп кетиңиздер
             </div>
 
-            <div class="gold-line"></div>
+            <div class="line"></div>
 
             <div class="details">
-                <p><strong>КҮНҮ</strong></p>
+
+                <strong>КҮНҮ</strong>
                 <p>24-апрель, 2027-жыл</p>
 
                 <br>
 
-                <p><strong>УБАКТЫСЫ</strong></p>
+                <strong>УБАКТЫСЫ</strong>
                 <p>15:00</p>
 
                 <br>
 
-                <p><strong>ДАРЕГИ</strong></p>
+                <strong>ДАРЕГИ</strong>
                 <p>Ысык-Көл облусу, Жети-Өгүз району,</p>
                 <p>Саруу айылы, 1/10</p>
 
                 <br>
 
-                <p><strong>ТОЙ ЭЭЛЕРИ</strong></p>
+                <strong>ТОЙ ЭЭЛЕРИ</strong>
 
                 <div class="hosts">
                     Кызылкул · Рая<br>
                     Кутман · Амина · Ислам
                 </div>
+
             </div>
 
-            <div class="gold-line"></div>
+            <div class="line"></div>
 
             <p class="closing">
                 Үйүбүздүн куту — келген конок,
@@ -396,69 +351,65 @@ footer {
             </p>
 
         </div>
-
     </section>
 
     <!-- HOUSE PHOTOS -->
 
     <section class="gallery">
 
-        <h2 class="gallery-title">
-            Биздин жаңы үйүбүз
-        </h2>
+        <h2>Биздин жаңы үйүбүз</h2>
 
         <img
-            src="assets/arches.jpeg"
-            alt="Үйдүн сүрөтү"
             class="house-photo"
+            src="./assets/arches.jpeg"
+            alt="Аркалуу үй"
         >
 
         <img
-            src="assets/house-exterior.jpeg"
+            class="house-photo"
+            src="./assets/house-exterior.jpeg"
             alt="Үйдүн сырткы көрүнүшү"
-            class="house-photo"
         >
 
         <img
-            src="assets/interior.jpeg"
-            alt="Үйдүн ички көрүнүшү"
             class="house-photo"
+            src="./assets/interior.jpeg"
+            alt="Үйдүн ички көрүнүшү"
         >
+
+        <p class="photo-error" id="photoError">
+            Сүрөттөр табылган жок. GitHub'дагы assets папкасын текшериңиз.
+        </p>
 
     </section>
 
-    <footer>
-        Сиздерди күтөбүз!
-    </footer>
+    <footer>Сиздерди күтөбүз!</footer>
 
 </main>
 
-<!-- MUSIC -->
+<!-- MUSIC FILE -->
 
 <audio id="backgroundMusic" loop preload="auto">
-    <source src="assets/music.mp3" type="audio/mpeg">
+    <source src="./assets/music.mp3" type="audio/mpeg">
 </audio>
 
-<button
-    class="music-button hidden"
-    id="musicButton"
-    onclick="toggleMusic()"
-    aria-label="Музыканы башкаруу"
->
+<button id="musicButton" class="music-button hidden" type="button">
     ♪
 </button>
 
 <script>
 
-const music = document.getElementById("backgroundMusic");
+const envelope = document.getElementById("envelope");
 const intro = document.getElementById("intro");
 const invitation = document.getElementById("invitation");
-const envelope = document.getElementById("envelope");
+const music = document.getElementById("backgroundMusic");
 const musicButton = document.getElementById("musicButton");
 
 let opened = false;
 
-function openInvitation() {
+/* OPEN INVITATION */
+
+envelope.addEventListener("click", async function() {
 
     if (opened) return;
     opened = true;
@@ -467,41 +418,61 @@ function openInvitation() {
 
     musicButton.classList.remove("hidden");
 
-    music.play().catch(function(error) {
-        console.log("Музыканы ойнотуу мүмкүн болгон жок:", error);
-    });
+    // Music starts after visitor taps the envelope
+    try {
+        await music.play();
+        musicButton.textContent = "♪";
+    } catch (error) {
+        console.log("Music could not start:", error);
+        musicButton.textContent = "▶";
+    }
 
     setTimeout(function() {
 
-        intro.style.transition = "opacity 1s ease";
+        intro.style.transition = "opacity 1s";
         intro.style.opacity = "0";
 
         setTimeout(function() {
-
             intro.classList.add("hidden");
             invitation.classList.remove("hidden");
-
             window.scrollTo(0, 0);
-
         }, 1000);
 
     }, 1000);
-}
 
-function toggleMusic() {
+});
+
+/* MUSIC PLAY / PAUSE */
+
+musicButton.addEventListener("click", async function() {
 
     if (music.paused) {
-
-        music.play();
-        musicButton.textContent = "♪";
-
+        try {
+            await music.play();
+            musicButton.textContent = "♪";
+        } catch (error) {
+            console.log("Music error:", error);
+        }
     } else {
-
         music.pause();
-        musicButton.textContent = "Ⅱ";
-
+        musicButton.textContent = "▶";
     }
-}
+
+});
+
+/* CHECK IMAGE FILES */
+
+const photos = document.querySelectorAll(".house-photo");
+const photoError = document.getElementById("photoError");
+
+photos.forEach(function(photo) {
+
+    photo.addEventListener("error", function() {
+        photoError.style.display = "block";
+        console.log("Image not found:", photo.src);
+    });
+
+});
 
 </script>
 
