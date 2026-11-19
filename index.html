@@ -1,56 +1,509 @@
-# Housewarming Invitation Website
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#eee5d7">
 
-A responsive, mobile-friendly digital invitation for a Kyrgyz housewarming celebration. The invitation opens from a cream envelope with a gold house seal, then reveals a traditional shyrdak background, house photos, event details, and background music.
+<title>Үй тоюна чакыруу</title>
 
-## Project structure
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
 
-```text
-uy_toy_invitation/
-├── index.html
-├── style.css
-├── script.js
-└── assets/
-    ├── arches.jpeg
-    ├── house-exterior.jpeg
-    ├── interior.jpeg
-    ├── music.mp3
-    └── shyrdak.jpeg
-```
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-## Run locally
+body {
+    background: #eee8de;
+    color: #40352b;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
 
-1. Download or clone this repository.
-2. Keep the `assets` folder in the same directory as `index.html`.
-3. Open `index.html` in a modern browser.
+.hidden {
+    display: none !important;
+}
 
-For the most reliable local preview, run a simple development server from the project folder:
+/* ENVELOPE SCREEN */
 
-```bash
-python -m http.server 8000
-```
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle, #fffaf1, #e8ddcc);
+    padding: 20px;
+}
 
-Then open `http://localhost:8000` in your browser.
+.envelope-area {
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+}
 
-## Publish with GitHub Pages
+.intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    letter-spacing: 3px;
+    margin-bottom: 45px;
+    color: #756044;
+}
 
-1. Create a GitHub repository and upload all project files, including the `assets` folder.
-2. Open the repository **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `main` branch and `/ (root)` folder, then save.
-5. Wait for GitHub Pages to publish the site.
+.envelope {
+    position: relative;
+    width: 320px;
+    max-width: 90vw;
+    height: 210px;
+    margin: auto;
+    background: #e9ddc9;
+    box-shadow: 0 20px 45px #75604435;
+    cursor: pointer;
+    perspective: 1000px;
+}
 
-## Customization
+.envelope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, #f8f0e4, #d9c6a8);
+    clip-path: polygon(0 0, 100% 0, 50% 58%);
+    z-index: 3;
+    transform-origin: top;
+    transition: transform 1s ease;
+}
 
-- Edit the Kyrgyz invitation text and event details in `index.html`.
-- Replace the images in `assets/` while keeping the same filenames, or update the image paths in `index.html` and `style.css`.
-- Replace `assets/music.mp3` with your preferred audio file. Keep the filename or update the `src` attribute in `index.html`.
-- Adjust colors, layout, and animations in `style.css`.
-- Adjust envelope and music interactions in `script.js`.
+.envelope::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e8d8c0, #cbb28d);
+    clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+    z-index: 2;
+}
 
-## Music playback note
+.wax-seal {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e5c77f, #a77c36 75%);
+    border: 2px solid #f0d99b;
+    box-shadow: 0 4px 12px #6b4a1d55;
+    left: 50%;
+    top: 48%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff3d3;
+    font-size: 29px;
+}
 
-Mobile browsers generally block autoplay with sound. The music therefore starts after the visitor taps the envelope. The music control can pause or resume playback.
+.wax-seal span {
+    font-family: 'Cormorant Garamond', serif;
+}
 
-## Language
+.envelope.open::before {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
 
-The source code, comments, and project documentation are written in English. The invitation content displayed to guests remains in Kyrgyz.
+.envelope.open .wax-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+    transition: 0.5s;
+}
+
+.tap-text {
+    margin-top: 35px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #887354;
+}
+
+/* INVITATION */
+
+#invitation {
+    animation: fadeIn 1.5s ease;
+}
+
+.hero {
+    min-height: 100vh;
+    padding: 70px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background:
+        linear-gradient(#fffaf0bd, #fffaf0bd),
+        url("assets/shyrdak.jpeg") center/cover no-repeat;
+}
+
+.invitation-card {
+    width: 100%;
+    max-width: 650px;
+    padding: 55px 28px;
+    border: 1px solid #b99b68;
+    outline: 1px solid #b99b6866;
+    outline-offset: 8px;
+    background: #fffaf0dc;
+    box-shadow: 0 15px 60px #4a38201c;
+}
+
+.small-heading {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: #94784e;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(35px, 8vw, 58px);
+    line-height: 1.1;
+    letter-spacing: 2px;
+    color: #5d4930;
+    margin-bottom: 25px;
+}
+
+.gold-line {
+    width: 70px;
+    height: 1px;
+    background: #ae8b50;
+    margin: 25px auto;
+}
+
+.invitation-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    line-height: 1.65;
+    color: #5e5041;
+}
+
+.event-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 31px;
+    color: #8d7044;
+    margin: 30px 0 15px;
+}
+
+.details {
+    margin-top: 35px;
+    line-height: 2;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.details strong {
+    color: #8b6d3e;
+}
+
+.hosts {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 27px;
+    color: #795d37;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+.closing {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    line-height: 1.6;
+    margin-top: 35px;
+    color: #5d4930;
+}
+
+/* HOUSE PHOTOS */
+
+.gallery {
+    padding: 65px 15px;
+    background: #f5f0e8;
+    text-align: center;
+}
+
+.gallery-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    color: #765c38;
+    margin-bottom: 35px;
+}
+
+.house-photo {
+    width: 100%;
+    max-width: 850px;
+    display: block;
+    margin: 0 auto 28px;
+    height: auto;
+    object-fit: cover;
+}
+
+/* MUSIC BUTTON */
+
+.music-button {
+    position: fixed;
+    right: 20px;
+    bottom: 22px;
+    z-index: 20;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid #b99b68;
+    background: #fffaf0;
+    color: #87683b;
+    font-size: 19px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px #0002;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 15px;
+    background: #eee5d7;
+    color: #917955;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    .invitation-card {
+        padding: 45px 20px;
+    }
+
+    .invitation-text {
+        font-size: 19px;
+    }
+
+    .details {
+        font-size: 12px;
+    }
+
+    .hosts {
+        font-size: 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENVELOPE -->
+
+<section id="intro">
+    <div class="envelope-area">
+
+        <div class="intro-title">
+            A SPECIAL INVITATION
+        </div>
+
+        <div class="envelope" id="envelope" onclick="openInvitation()">
+            <div class="wax-seal">
+                <span>⌂</span>
+            </div>
+        </div>
+
+        <div class="tap-text">
+            OPEN YOUR INVITATION
+        </div>
+
+    </div>
+</section>
+
+<!-- INVITATION CONTENT -->
+
+<main id="invitation" class="hidden">
+
+    <section class="hero">
+
+        <div class="invitation-card">
+
+            <div class="small-heading">
+                СИЗДЕРГЕ ЧЫН ЖҮРӨКТӨН
+            </div>
+
+            <h1>
+                ҮЙ ТОЮНА<br>
+                ЧАКЫРУУ
+            </h1>
+
+            <div class="gold-line"></div>
+
+            <p class="invitation-text">
+                Урматтуу туугандар, жакындар жана кадырлуу коноктор!
+                <br><br>
+                Көптөн күткөн тилегибиз орундалып, өз үйүбүздүн босогосун аттадык.
+                Бул кубанычтуу күнүбүздү сиздер менен бөлүшүп, ак дасторконубуздун
+                төрүнөн орун алып, жакшы тилек-батаңызды берип кетүүгө чакырабыз.
+            </p>
+
+            <div class="event-title">
+                Тойго келип конок болуп кетиңиздер
+            </div>
+
+            <div class="gold-line"></div>
+
+            <div class="details">
+                <p><strong>КҮНҮ</strong></p>
+                <p>24-апрель, 2027-жыл</p>
+
+                <br>
+
+                <p><strong>УБАКТЫСЫ</strong></p>
+                <p>15:00</p>
+
+                <br>
+
+                <p><strong>ДАРЕГИ</strong></p>
+                <p>Ысык-Көл облусу, Жети-Өгүз району,</p>
+                <p>Саруу айылы, 1/10</p>
+
+                <br>
+
+                <p><strong>ТОЙ ЭЭЛЕРИ</strong></p>
+
+                <div class="hosts">
+                    Кызылкул · Рая<br>
+                    Кутман · Амина · Ислам
+                </div>
+            </div>
+
+            <div class="gold-line"></div>
+
+            <p class="closing">
+                Үйүбүздүн куту — келген конок,
+                төрүбүздүн көркү — сиздерсиздер!
+                <br><br>
+                Ар бир келген кадамыңыздар жакшылык алып келип,
+                айткан ак тилектериңиздер үйүбүзгө береке болсун.
+                <br><br>
+                Жаңы конушубуздун алгачкы кубанычын сиздер менен
+                бөлүшүүгө кубанычтабыз!
+                <br><br>
+                Кош келиңиздер, кадырлуу коноктор!
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- HOUSE PHOTOS -->
+
+    <section class="gallery">
+
+        <h2 class="gallery-title">
+            Биздин жаңы үйүбүз
+        </h2>
+
+        <img
+            src="assets/arches.jpeg"
+            alt="Үйдүн сүрөтү"
+            class="house-photo"
+        >
+
+        <img
+            src="assets/house-exterior.jpeg"
+            alt="Үйдүн сырткы көрүнүшү"
+            class="house-photo"
+        >
+
+        <img
+            src="assets/interior.jpeg"
+            alt="Үйдүн ички көрүнүшү"
+            class="house-photo"
+        >
+
+    </section>
+
+    <footer>
+        Сиздерди күтөбүз!
+    </footer>
+
+</main>
+
+<!-- MUSIC -->
+
+<audio id="backgroundMusic" loop preload="auto">
+    <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<button
+    class="music-button hidden"
+    id="musicButton"
+    onclick="toggleMusic()"
+    aria-label="Музыканы башкаруу"
+>
+    ♪
+</button>
+
+<script>
+
+const music = document.getElementById("backgroundMusic");
+const intro = document.getElementById("intro");
+const invitation = document.getElementById("invitation");
+const envelope = document.getElementById("envelope");
+const musicButton = document.getElementById("musicButton");
+
+let opened = false;
+
+function openInvitation() {
+
+    if (opened) return;
+    opened = true;
+
+    envelope.classList.add("open");
+
+    musicButton.classList.remove("hidden");
+
+    music.play().catch(function(error) {
+        console.log("Музыканы ойнотуу мүмкүн болгон жок:", error);
+    });
+
+    setTimeout(function() {
+
+        intro.style.transition = "opacity 1s ease";
+        intro.style.opacity = "0";
+
+        setTimeout(function() {
+
+            intro.classList.add("hidden");
+            invitation.classList.remove("hidden");
+
+            window.scrollTo(0, 0);
+
+        }, 1000);
+
+    }, 1000);
+}
+
+function toggleMusic() {
+
+    if (music.paused) {
+
+        music.play();
+        musicButton.textContent = "♪";
+
+    } else {
+
+        music.pause();
+        musicButton.textContent = "Ⅱ";
+
+    }
+}
+
+</script>
+
+</body>
+</html>
